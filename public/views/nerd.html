@@ -1,0 +1,37 @@
+<div class="jumbotron  text-center">
+    
+        <div ng-show="data.MapSurveys.length > 0">
+            <div class="panel panel-primary">
+                <div class="panel-heading">       Mapped Surveys - Sort & Filter      </div>
+                <table ng-table="tableParams" id="grdMyActions" template-pagination="custom/pager" show-filter="true" class="table table-condensed table-bordered table-striped">
+                    <tr ng-repeat="Cat in tableData track by $index" class="mouse-over-pointer" ng-click="selectedCategory = Cat;" ng-class="{'success':$index===selectedIndex }">
+                        <td data-title=" 'Address Location' " filter=" { 'address' : 'text' }" sortable="'address'" class="col-md-8 text-center">
+                            {{Cat.address}}
+                        </td>
+                        <td data-title="'Max Water (ft)'" filter="{ 'maxwater': 'text' }" sortable="'maxwater'" class="col-md-4 text-center">
+                            {{Cat.maxwater}}
+                        </td>
+
+                    </tr>
+                </table>
+                <script type="text/ng-template" id="custom/pager">
+                    <ul class="pager ng-cloak">
+                        <li ng-repeat="page in pages"
+                            ng-class="{'disabled': !page.active, 'previous': page.type == 'prev', 'next': page.type == 'next'}"
+                            ng-show="page.type == 'prev' || page.type == 'next'" ng-switch="page.type">
+                            <a ng-switch-when="prev" ng-click="params.page(page.number)" href="" class="marginned">&laquo; Previous</a>
+                            <a ng-switch-when="next" ng-click="params.page(page.number)" href="" class="marginned">Next &raquo;</a>
+                        </li>
+                        <li>
+                            <div class="btn-group">
+                                <button type="button" ng-class="{'active':params.count() == 10}" ng-click="params.count(10)" class="btn btn-default">10</button>
+                                <button type="button" ng-class="{'active':params.count() == 25}" ng-click="params.count(25)" class="btn btn-default">25</button>
+                                <button type="button" ng-class="{'active':params.count() == 50}" ng-click="params.count(50)" class="btn btn-default">50</button>
+                                <button type="button" ng-class="{'active':params.count() == 100}" ng-click="params.count(100)" class="btn btn-default">100</button>
+                            </div>
+                        </li>
+                    </ul>
+                </script>
+            </div>
+        </div>
+    </div>
